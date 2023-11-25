@@ -103,6 +103,8 @@
           - [更新 post-demo 接口](#更新-post-demo-接口)
         - [3.调试](#3调试)
         - [4.自动化运行数据驱动脚本](#4自动化运行数据驱动脚本)
+    - [文件上传](#文件上传)
+    - [并发测试](#并发测试)
 
 ## 介绍
 
@@ -1439,3 +1441,42 @@ npm run data-driven-test
 ```
 
 ![2023112419k7I9ZE](https://cdn.jsdelivr.net/gh/naodeng/blogimg@master/uPic/2023112419k7I9ZE.png)
+
+### 文件上传
+
+在 postman 和 newman 做接口自动化时，文件上传可以通过 form-data 的方式来实现。
+
+文件必须存在于当前工作目录中。请求的 "src "属性中也必须包含文件名。
+
+在此集合中，当前工作目录中应包含名为 "demo.txt" 的文件。
+
+```json
+{
+    "info": {
+        "name": "file-upload"
+    },
+    "item": [
+        {
+            "request": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "file",
+                            "type": "file",
+                            "enabled": true,
+                            "src": "demo.txt"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+> 注意：调整文件上传的路径，确保文件存在路径在项目根目录下存在或者使用绝对路径
+
+### 并发测试
